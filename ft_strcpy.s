@@ -1,7 +1,7 @@
 section .text
 	global _ft_strcpy
 
-_ft_str_cpy :
+_ft_strcpy :
 	mov rax, 0
 	jump loop
 
