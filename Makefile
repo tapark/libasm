@@ -1,4 +1,7 @@
 SRCS	= ./ft_strlen.s \
+		  ./ft_strcpy.s \
+		  ./ft_strcmp.s \
+		  ./ft_strdup.s \
 
 NAME	= libasm.a
 OBJS	= $(SRCS:.s=.o)
@@ -8,7 +11,7 @@ NA		= nasm
 NFLAGS	= -f macho64
 
 .s.o :
-	$(NA) $(NFLAGS) $(SRCS)
+	$(NA) $(NFLAGS) $<
 
 $(NAME) : $(OBJS)
 	$(LIBC) $(NAME) $(OBJS)
@@ -19,6 +22,9 @@ clean :
 	$(RM) $(OBJS)
 
 fclean : clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) a.out
 
 re : fclean all
+
+test :
+	gcc main.c -lasm -L.

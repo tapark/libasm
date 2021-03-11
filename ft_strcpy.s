@@ -2,20 +2,20 @@ section .text
 	global _ft_strcpy
 
 _ft_strcpy :
-	mov rax, 0
-	jump loop
+	mov RAX, 0
+	jmp loop
 
 loop :
-	mov al, BYTE[RDI + RAX]
-	mov BYTE[RSI + RAX], al
-	cmp al, 0
+	mov cl, BYTE[RSI + RAX]
+	mov BYTE[RDI + RAX], cl
+	cmp cl, 0
 	jne increase
 	je	end
 
 increase :
 	inc RAX
-	jump loop
+	jmp loop
 
 end :
-	mov RAX, RSI
+	mov RAX, RDI
 	ret

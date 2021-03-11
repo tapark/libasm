@@ -3,7 +3,7 @@ section .text
 
 _ft_strlen :
 	mov RAX, 0
-	jump while
+	jmp loop
 
 loop :
 	cmp BYTE[RDI + RAX], 0
@@ -12,7 +12,7 @@ loop :
 
 increase :
 	inc RAX
-	jump loop
+	jmp loop
 
 end :
 	ret

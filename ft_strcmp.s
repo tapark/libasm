@@ -3,18 +3,26 @@ section .text
 
 _ft_strcmp :
 	mov RAX, 0
-	jump loop
+	jmp loop
 
 loop :
-	cmp BYTE[RSI + RAX], BYTE[RDI + RAX]
+	mov al, BYTE[RDI]
+	mov dl, BYTE[RSI]
+	cmp al, 0
+	je end
+	cmp dl, 0
+	je end
+	cmp al, dl
 	je increase
 	jne end
 
 increase :
-	inc RAX
-	jump loop
+	inc RDI
+	inc RSI
+	jmp loop
 
 end :
-	sub BYTE[RSI + RAX], BYTE[RDI + RAX]
-	move RAX, BYTE[RSI + RAX]
+	movzx RAX, al
+	movzx RDX, dl
+	sub RAX, RDX
 	ret
