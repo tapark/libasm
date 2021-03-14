@@ -3,10 +3,14 @@
 int main(int argc, char **argv)
 {
 	char dest[999];
+	char text[999];
 	char *str1;
 	char *str2;
 	char *str3;
 	char *str4;
+
+	int fd;
+	int ret;
 
 	printf("\n");
 
@@ -44,6 +48,50 @@ int main(int argc, char **argv)
 	free(str2);
 	free(str3);
 	free(str4);
+
+	printf("\n");
+
+	write(1, "write(1)    : ", 14);
+	ret = write(1, argv[1], ft_strlen(argv[1]));
+	printf(" / return : %d\n", ret);
+	write(1, "write(2)    : ", 14);
+	write(1, argv[2], ft_strlen(argv[2]));
+	printf(" / return : %d\n", ret);
+
+	ft_write(1, "ft_write(1) : ", 11);
+	ret = write(1, argv[1], ft_strlen(argv[1]));
+	printf(" / return : %d\n", ret);
+	ft_write(1, "write(2) : ", 11);
+	ft_write(1, argv[2], ft_strlen(argv[2]));
+	printf(" / return : %d\n", ret);
+
+	errno = 0;
+	printf("write_errno    : %d -> ", errno);
+	write(-1, "hello", 5);
+	printf("%d\n", errno);
+
+	errno = 0;
+	printf("ft_write_errno : %d -> ", errno);
+	ft_write(-1, "hello", 5);
+	printf("%d\n", errno);
+
+	printf("\n");
+
+	fd = open("Makefile", O_RDONLY);
+	ret = read(fd, text, 900);
+	printf("read_fd    : %d / return : %d\n", fd, ret);
+	ret = ft_read(fd, text, 900);
+	printf("ft_read_fd : %d / return : %d\n", fd, ret);
+
+	errno = 0;
+	printf("read_errno    : %d -> ", errno);
+	read(-1, "hello", 5);
+	printf("%d\n", errno);
+
+	errno = 0;
+	printf("ft_read_errno : %d -> ", errno);
+	ft_read(-1, "hello", 5);
+	printf("%d\n", errno);
 
 	printf("\n");
 
